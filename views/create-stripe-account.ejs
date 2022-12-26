@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css"  href="\css\aa.css">
+    <script src="https://kit.fontawesome.com/1364972581.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="\js\create-stripe-account.js" defer></script>
+    <title>stripe set-up</title>
+    <link rel="icon" type="image/png"  href="\media\32 x 32 icon.png">
+</head>
+<body>
+     <%- include('partials/header')%>
+    </div>
+
+    <div id="container-new" class="col-6 offset-3">
+<h2 class="text-center mt-3">
+    <div class="line-before"></div>
+    create stripe account and connect to virt 
+    <div class="line-after"></div>
+  </h2>
+
+
+  <form action="/account/create-stripe-account/<%= artist.id %> " id="form" class="mt-3" method="POST">
+
+    <label for="name" class="form-label">your name (a member of the band or your manager):</label>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text dollar"><i class="fas fa-user"></i></span>
+      </div>
+      <input type="text" value="" placeholder="your name..." 
+      class="mb-0 price" id="name" name="name" minlength="1" maxlength="35" required>
+    </div>
+    <p class="mt-3 hide invalid" id="invalid-name">invalid name</p>
+
+    <label for="artEmail" class="form-label mt-3">your email:</label>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text dollar"><i class="fas fa-envelope"></i></span>
+      </div>
+      <input type="email" placeholder="your@email.com" class="mb-3 price" 
+      name="email" id="email" value="" minlength="9" maxlength="254" required>
+    </div>
+    <p class="mt-3 hide invalid" id="invalid-email">invalid email</p>
+
+    <label for="country" class="">country you're located in:</label>
+    <select name="country" id="select country"> 
+      <option value="AU">Australia 🇦🇺</option>
+      <option value="AT">Austria 🇦🇹</option>
+      <option value="BE">Belgium 🇧🇪</option>
+      <option value="BR">Brazil 🇧🇷</option>
+      <option value="BG">Bulgaria 🇧🇬</option>
+      <option value="CA">Canada 🇨🇦</option>
+      <option value="CY">Cyprus 🇨🇾</option>
+      <option value="CZ">Czech Republic 🇨🇿</option>
+      <option value="DK">Denmark 🇩🇰</option>
+      <option value="EE">Estonia 🇪🇪</option>
+      <option value="FI">Finland 🇫🇮</option>
+      <option value="FR">France 🇫🇷</option>
+      <option value="DE">Germany 🇩🇪</option>
+      <option value="GR">Greece 🇬🇷</option>
+      <option value="HK">Hong Kong 🇭🇰</option>
+      <option value="HU">Hungary 🇭🇺</option>
+      <option value="IN">India 🇮🇳</option>
+      <option value="IE">Ireland 🇮🇪</option>
+      <option value="IT">Italy 🇮🇹</option>
+      <option value="JP">Japan 🇯🇵</option>
+      <option value="LV">Latvia 🇱🇻</option>
+      <option value="LT">Lithuania 🇱🇹</option>
+      <option value="LU">Luxembourg 🇱🇺</option>
+      <option value="MY">Malaysia 🇲🇾</option>
+      <option value="MT">Malta 🇲🇹</option>
+      <option value="MX">Mexico 🇲🇽</option>
+      <option value="NL">Netherlands 🇳🇱</option>
+      <option value="NZ">New Zealand 🇳🇿</option>
+      <option value="NO">Norway 🇳🇴</option>
+      <option value="PL">Poland 🇵🇱</option>
+      <option value="PT">Portugal 🇵🇹</option>
+      <option value="RO">Romania 🇷🇴</option>
+      <option value="SG">Signapore 🇸🇬</option>
+      <option value="SK">Slovakia 🇸🇰</option>
+      <option value="SI">Slovenia 🇸🇮</option>
+      <option value="ES">Spain 🇪🇸</option>
+      <option value="SE">Sweden 🇸🇪</option>
+      <option value="CH">Switzerland 🇨🇭</option>
+      <option value="AE">United Arab Emirates 🇦🇪</option>
+      <option value="GB">Uited Kingdom 🇬🇧</option>
+      <option value="US" selected>United States of America 🇺🇸</option>
+     </select>  
+
+     <label for="currency" class="mt-4">this setting only refers to purchases/payments, 
+        artist posts will still be displayed in US dollars ($):</label>
+      <select name="currency" id="currency" class="currency currency-cs mt-2">
+          <option value="usd"  <%=user.currency === 'usd' ? 'selected': '' %>>USD $</option>
+          <option value="gbp" <%=user.currency === 'gbp' ? 'selected': '' %>>GBP £</option>
+          <option value="eur" <%=user.currency === 'eur' ? 'selected': '' %>>EUR €</option>
+      </select>
+    
+      <div class="checkbox">
+      <label class="text-center mt-3" for="tos">by submitting this you agree to the stripe connect 
+       <a class="tos" href="/stripe-connect-terms">terms</a></label>
+    
+       <div class="tos-div">
+       <input type="checkbox" class="text-center mt-3" name="stripe_tos" id="tos" required>
+      </div>
+      </div>
+      <p class="mt-3 hide invalid" id="tos-feedback">you must agree to the terms to create an account</p>
+
+    <div class="submit-cs">
+    <button type="submit" class="mt-5" id="submit-cs submit">submit</button>
+    </div>
+</form>
+
+</div>
+</div>
+
+
+<div class="box none" id="pop-up spinner">
+    
+  <div class="loading loading-new-post"></div>
+
+  <div class="text-center pop-up-body pop-up-body-new-post">
+     creating account, this may take a few minutes...
+  </div>
+</div>
+<div class="mt-auto">
+<%- include('partials/footer')%>   
+</div> 
+</body>
+
+<script>
+  const alert = document.getElementById('pdAlert');
+  const dismiss = document.getElementById('dismiss-pd');
+  dismiss.onclick = function () {
+    if (alert.style.display !== "none") {
+      alert.style.display = "none";
+    } else {
+      alert.style.display = "block";
+    }
+  };
+  
+  </script>
+
+
+
+
+  
+  <style>
+    a{
+    color: #3c3d3c;
+    text-decoration: none;
+}
+
+a:hover{
+    color: #3c3d3c;
+ text-decoration: underline #1ca78b 0.3vh;
+}
+
+footer.a{
+    color: blue;
+}
+
+</style>
+
+</html>

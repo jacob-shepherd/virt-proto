@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css"  href="\css\aa.css">
+    <title>Ban <%= artist.artName %></title>
+    <link rel="icon" type="image/png"  href="\media\32 x 32 icon.png">
+</head>
+<body>
+
+    </div>
+
+    <div id="container-new" class="col-6 offset-3">
+<h2 class="text-center mt-3">
+    <div class="line-before"></div>
+    Ban <%= artist.artName %> 
+    <div class="line-after"></div>
+  </h2>
+
+
+<form action="/ban-user/<%= artist.id %>" class="needs-validation" method="POST" novalidate>
+
+    <label for="reason" class="mb-2">Select ban reason</label>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="reason">Reason</label>
+      </div>
+      <select name="reason" required class="custom-select form-control" id="inputGroupSelect01">
+          <option value="illegal content">illegal content</option>
+          <option value="overtly sexual content">sexual content</option>
+          <option value="breach of copyright law or suspected breach of copyright law">breach of copyright law or suspected breach of copyright law</option>
+          <option value="promoting scams">promoting scams</option>
+          <option value="overly political content">overly political content</option>
+          <option value="other">other (please add details below)</option>
+      </select>
+    </div>
+   
+    <label for="details" class="form-label">details of ban</label>
+    <textarea name="details" id="desc" cols="68" rows="20"
+     class=" mb-3" required></textarea>
+
+<div class="form-row text-center">
+    <div class="col-12">
+        <button type="submit" class="mt-3 rounded">Submit</button>
+    </div>
+ </div>
+</div>
+</form>
+
+</div>
+</div>
+<div class="mt-auto">
+<%- include('partials/footer')%>   
+</div> 
+</body>
+
+<script>
+  (function () {
+    'use strict'
+  
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation')
+  
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+  
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+  </script>
+
+<script>
+  const alert = document.getElementById('pdAlert');
+  const dismiss = document.getElementById('dismiss-pd');
+  dismiss.onclick = function () {
+    if (alert.style.display !== "none") {
+      alert.style.display = "none";
+    } else {
+      alert.style.display = "block";
+    }
+  };
+  
+  </script>
+
+<style>
+    a{
+    color: #3c3d3c;
+    text-decoration: none;
+}
+
+a:hover{
+    color: #3c3d3c;
+ text-decoration: underline #1ca78b 0.3vh;
+}
+
+footer.a{
+    color: blue;
+}
+
+</style>
+</html>

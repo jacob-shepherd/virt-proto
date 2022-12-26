@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css"  href="\css\artistShow.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+     crossorigin="anonymous">
+    <title>success</title>
+    <link rel="icon" type="image/png"  href="\media\32 x 32 icon.png">
+</head>
+<body>
+    <nav class="navbar bg-light">
+        <div class="header bg-light">
+            <%- include('partials/logoTop')%>
+     </nav>
+     <%- include('partials/header')%>
+    </div>
+
+    <div id="container-new" class="col-6   offset-3">
+<h2 class="text-center mt-3">
+    <div class="line-before"></div>
+stripe successfully created and connected to virt
+    <div class="line-after mb-5"></div>
+  </h2>
+
+<a href="/artists/<%= artist.id %>">
+<p class="text-center mt-3">
+    go to your account
+</p>
+</a>
+
+
+<a href="/artists/<%= artist.id %>/new">
+<p class="text-center mt-1">
+    create a post
+</p>
+</a>
+
+<form action="/artists/<%= artist.id %>/stripe-login" method="POST">
+    <button type="submit">login to stripe</button>
+</form>
+
+    
+
+
+</div>
+<div class="mt-auto mt-3">
+<%- include('partials/footer')%>   
+</div> 
+</body>
+</html>
+

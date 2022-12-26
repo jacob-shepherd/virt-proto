@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="..\public\media\logo-main.svg">
+    <link rel="stylesheet" type="text/css"  href="\css\artistShow.css">
+    <script src="https://kit.fontawesome.com/1364972581.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title><%= artist.artName %> </title>
+    <link rel="icon" type="image/png"  href="\media\32 x 32 icon.png">
+</head>
+<body>
+     <%- include('partials/header')%>
+</div>
+
+<div id="container-new" class="col-10 offset-1">
+
+    <% if(saa && saa.length) { %> 
+        <div class="alert alert-success alert-dismissible fade show col-6 offset-3 mt-3" 
+        id="saaAlert" role="alert">
+            <h3 class="text-center">
+                <%= saa %> 
+            </h3>
+            <p id="dismiss-saa" class="text-center dismiss">dismiss</p>
+          </div>
+        <%  } %>
+
+     
+        <img class="img-fluid thumb logo p-2 offset-5 mb-0" alt="" src="<%= artist.banner  %>">
+     
+
+        <% if(activeUser && userID === artistUser) { %> 
+        <a href="/artists/<%= artist._id  %>/edit-banner">
+            <p class="text-center">replace banner <i class="fas fa-edit"></i></p>
+            </a>
+            <% } %> 
+    </div>
+    <div class="col-md-12">
+        <div class="card-body">
+            <h3 class="mt-0 card-title text-center offset-0">
+                <%= artist.artName  %>
+            </h3>
+      
+            <p class="card-text info text-center offset-0 mb-0">
+                 Artist genre: <%= artist.genre  %>
+            </p>
+
+            <% if(user.following.includes(artist.id)) { %> 
+            <form action="/artists/unfollow?_method=PATCH" method="post">
+            <button class="offset-0 follow">unfollow</button>
+            </form>
+            <% } else { %> 
+                <style>.follow{
+                    background-color: red;
+                    color: black;
+                    font-weight: 700;
+                }</style>
+                <form action="/artists/follow?_method=PATCH" method="post">
+                <button type="submit" class="offset-0 follow">follow</button>
+                </form>
+                <% } %> 
+        </div>
+    </div>
+
+    <% if(activeUser && userID === artistUser) { %> 
+
+
+        <p class="mt-1 info text-center">total revenue: $<%= artist.totalRevenue %> </p>
+
+        <div class="artist-options">
+        <% if (artist.stripe_acct == null || undefined || artist.stripe_acct === '') {%> 
+    <a href="/account/create-stripe-account/<%= artist.id %>">
+<button class="mt-2 text-center offset-0">create stripe account</button>
+    </a>
+    <% }else{ %> 
+        <a href="/account/stripe-connect/<%= artist.id %>">
+            <button class="mt-2 text-center offset-0">stripe connect</button>
+                </a>
+        <% } %> 
+       <a href="/artists/<%= artist.id  %>/edit">
+                <button class="mt-2 text-center offset-1">edit account</button>
+                    </a>
+
+    <a href="/artists/<%= artist.id%>delete-account">
+        <button class="offset-2 mb-3 buy">Delete account</button>
+    </a>
+        
+</div>
+        <% } %> 
+
+
+    
+
+</div>
+</div>
+</div>
+
+
+
+</div>
+
+</div>
+    </div>
+<div class="mt-auto footer">
+<%- include('partials/footer')%>   
+
+
+</div> 
+</body>
+
+<script>
+const alert = document.getElementById('saaAlert');
+const dismiss = document.getElementById('dismiss-saa');
+dismiss.onclick = function () {
+  if (alert.style.display !== "none") {
+    alert.style.display = "none";
+  } else {
+    alert.style.display = "block";
+  }
+};
+</script>
+
+<style>
+a{
+    color: #3c3d3c;
+    text-decoration: none;
+}
+</style>
+
+</html>

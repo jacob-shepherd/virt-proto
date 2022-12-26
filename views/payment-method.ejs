@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="\css\forms.css">
+    <script src="https://kit.fontawesome.com/1364972581.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="\js\card-form.js" defer></script>
+    <title>Virt: Create Account</title>
+    <link rel="icon" type="image/png"  href="\media\32 x 32 icon.png">
+</head>
+<body>
+    <nav class="navbar bg-light">
+        <div class="header bg-light">
+            <%- include('partials/logoTop')%>
+     </nav>
+     <%- include('partials/header')%>
+    </div>
+
+    <% if(eca && eca.length) { %> 
+      <div class="alert alert-danger alert-dismissible fade show col-6 offset-3 mt-3" 
+      id="pdAlert" role="alert">
+          <h3 class="text-center">
+              <%= eca %> 
+          </h3>
+          <p id="dismiss-pd" class="text-center dismiss">dismiss</p>
+        </div>
+      <%  } %>
+
+    <div id="container-new" class="col-6 offset-3">
+<h2 class="text-center mt-3">
+    <div class="line-before"></div>
+    add/update payment method
+    <div class="line-after mb-4"></div>
+  </h2>
+
+
+<form action="/account/payment-method" method="POST" id="form">
+
+
+<label for="card-type" class="mt-3">card type</label>
+<select name="card-type" id="type">
+    <option value="Visa">Visa</option>
+    <option value="MasterCard">MasterCard</option>
+    <option value="American-Express">American Express</option>
+</select>
+<br>    
+  <label for="email" class="form-label mt-3">card number:</label>
+  <div class="input-group mb-2">
+    <div class="input-group-prepend">
+      <span class="input-group-text dollar"><i class="fas fa-user"></i></span>
+    </div>
+    <input type="text" placeholder="xxxx-xxxx-xxxx-xxxx" 
+    class="form-control mb-1 price"
+     name="c_num" minlength="15" maxlength="19" id="c_num" required>
+</div>
+<div class="email error mb-1" id="invalidEmail"></div>
+
+    <label for="username" class="form-label mt-3">expiration month:</label>
+   <select name="exp_month" id="exp_year">
+    <option value="01">01</option>
+    <option value="02">02</option>
+    <option value="03">03</option>
+    <option value="04">04</option>
+    <option value="05">05</option>
+    <option value="06">06</option>
+    <option value="07">07</option>
+    <option value="08">08</option>
+    <option value="09">09</option>
+    <option value="10">10</option>
+    <option value="11">11</option>
+    <option value="12">12</option>
+   </select>
+  <div class="username error mb-1"></div>
+
+
+
+  <label for="username" class="form-label mt-3">expiration year:</label>
+  <select name="exp_year" id="exp_year">
+   <option value="2023">2023</option>
+   <option value="2024">2024</option>
+   <option value="2025">2025</option>
+   <option value="2026">2026</option>
+   <option value="2027">2027</option>
+   <option value="2028">2028</option>
+   <option value="2029">2029</option>
+   <option value="2030">2030</option>
+  </select>
+ <div class="username error mb-1"></div>
+
+
+    <label for="password" class="form-label mt-3">security code/cvc:</label>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text dollar"><i class="fas fa-lock"></i></span>
+      </div>
+      <input type="number" placeholder="cvc" 
+      class="form-control mb-1 price" name="cvc" 
+      minlength="3" maxlength="3" id="password" required>
+ </div>
+ <div class="password error mb-1" id="validPwd"></div>
+
+ <label for="password" class="form-label mt-3">first name:</label>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text dollar"><i class="fas fa-lock"></i></span>
+      </div>
+      <input type="text" placeholder="re-enter password" 
+      class="form-control mb-1 price" name="first_name" 
+      minlength="1" maxlength="30" id="passwordConfirm" required>
+ </div>
+ <div class="re-enter error mb-1" id="validConfirm"></div>
+
+ <label for="password" class="form-label mt-3">last name:</label>
+ <div class="input-group mb-3">
+   <div class="input-group-prepend">
+     <span class="input-group-text dollar"><i class="fas fa-lock"></i></span>
+   </div>
+   <input type="text" placeholder="re-enter password" 
+   class="form-control mb-1 price" name="last_name" 
+   minlength="1" maxlength="40" id="passwordConfirm" required>
+</div>
+<div class="re-enter error mb-1" id="validConfirm"></div>
+
+<label for="password" class="form-label mt-3">city:</label>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text dollar"><i class="fas fa-lock"></i></span>
+  </div>
+  <input type="text" placeholder="re-enter password" 
+  class="form-control mb-1 price" name="city" 
+  minlength="1" maxlength="50" id="passwordConfirm" required>
+</div>
+<div class="re-enter error mb-1" id="validConfirm"></div>
+
+<label for="password" class="form-label mt-3">billing address:</label>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text dollar"><i class="fas fa-lock"></i></span>
+  </div>
+  <input type="text" placeholder="re-enter password" 
+  class="form-control mb-1 price" name="address" 
+  minlength="20" maxlength="150" id="passwordConfirm" required>
+</div>
+<div class="re-enter error mb-1" id="validConfirm"></div>
+
+<label for="password" class="form-label mt-3">zip or postal code:</label>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text dollar"><i class="fas fa-lock"></i></span>
+  </div>
+  <input type="text" placeholder="re-enter password" 
+  class="form-control mb-1 price" name="zip" 
+  minlength="7" maxlength="12" id="passwordConfirm" required>
+</div>
+<div class="re-enter error mb-1" id="validConfirm"></div>
+
+
+
+<div class="form-row text-center">
+    <div class="col-12">
+        <button type="submit" id="submit" class="mt-2 rounded">save</button>
+    </div>
+ </div>
+</div>
+</form>
+
+</div>
+</div>
+<div class="mt-auto">
+<%- include('partials/footer')%>   
+</div> 
+</body>
+
+
+<script>
+  const alert = document.getElementById('pdAlert');
+  const dismiss = document.getElementById('dismiss-pd');
+  dismiss.onclick = function () {
+    if (alert.style.display !== "none") {
+      alert.style.display = "none";
+    } else {
+      alert.style.display = "block";
+    }
+  };
+  
+  </script>
+ 
+ <style>
+  a{
+  color: #3c3d3c;
+  text-decoration: none;
+}
+
+a:hover{
+  color: #3c3d3c;
+text-decoration: underline #1ca78b 0.3vh;
+}
+
+footer.a{
+  color: blue;
+}
+
+</style>
+</html>
